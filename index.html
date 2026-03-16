@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Elevent — Análise de Performance</title>
-<link href="https://fonts.googleapis.com/css2?family=Antonio:wght@400;700&family=Noto+Serif:wght@400;600&display=swap" rel="stylesheet">
+<title>Elevent — Visão Geral · Performance Acumulada</title>
+<link href="https://fonts.googleapis.com/css2?family=Antonio:wght@400;700&family=Noto+Serif:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
 <style>
   :root {
     --bg:        #09162d;
@@ -14,19 +14,20 @@
     --border:    rgba(255,255,255,0.07);
     --coral:     #ff664d;
     --coral-dim: rgba(255,102,77,0.12);
-    --cream:     #fffdf5;
-    --green:     #3ecf8e;
-    --gold:      #f5c842;
-    --red:       #ff4f6a;
-    --text-p:    #fffdf5;
-    --text-s:    rgba(255,253,245,0.55);
-    --text-m:    rgba(255,253,245,0.28);
     --cc:        #ff664d;
     --cc-dim:    rgba(255,102,77,0.10);
     --cc-border: rgba(255,102,77,0.25);
     --ca:        #9880df;
     --ca-dim:    rgba(152,128,223,0.10);
     --ca-border: rgba(152,128,223,0.25);
+    --cream:     #fffdf5;
+    --green:     #3ecf8e;
+    --gold:      #f5c842;
+    --red:       #ff4f6a;
+    --blue:      #4f9eff;
+    --text-p:    #fffdf5;
+    --text-s:    rgba(255,253,245,0.55);
+    --text-m:    rgba(255,253,245,0.28);
   }
 
   *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
@@ -43,362 +44,333 @@
     content:'';
     position:fixed; inset:0; pointer-events:none; z-index:0;
     background:
-      radial-gradient(ellipse 65% 45% at 0% 0%,    rgba(255,102,77,.07) 0%, transparent 55%),
-      radial-gradient(ellipse 50% 40% at 100% 100%, rgba(76,59,130,.10)  0%, transparent 55%);
+      radial-gradient(ellipse 70% 50% at 0% 0%,    rgba(255,102,77,.08) 0%, transparent 55%),
+      radial-gradient(ellipse 55% 45% at 100% 100%, rgba(76,59,130,.12)  0%, transparent 55%),
+      radial-gradient(ellipse 40% 35% at 50% 50%,  rgba(79,158,255,.04) 0%, transparent 60%);
   }
 
   .page {
     position:relative; z-index:1;
-    max-width:1180px;
-    margin:0 auto;
-    padding:52px 36px 90px;
+    max-width:1200px; margin:0 auto;
+    padding:52px 36px 100px;
   }
 
-  /* ── HEADER ─────────────────────────────────── */
+  /* ─── HEADER ─── */
   .header {
-    display:grid;
-    grid-template-columns:1fr auto;
-    align-items:center;
-    gap:40px;
+    display:grid; grid-template-columns:1fr auto;
+    align-items:center; gap:40px;
     padding-bottom:40px;
     border-bottom:1px solid var(--border);
     margin-bottom:56px;
   }
 
-  /* Logo block */
-  .logo-block {
-    display:flex;
-    flex-direction:column;
-    gap:18px;
+  .logo-block { display:flex; flex-direction:column; gap:14px; }
+
+  .logo-svg-wrap {
+    display:inline-block; background:#09162d;
+    padding:12px 24px;
+    width:fit-content;
   }
 
- .logo-svg-wrap {
-  display: inline-block;
-  padding: 0px 5px;
-  width: fit-content;
-}
+  .header-sub { font-size:13px; color:var(--text-s); letter-spacing:.5px; padding-left:2px; }
 
-  .header-sub {
-    font-family:'Antonio', sans-serif;
-    text-transform: uppercase;
-    font-size: 20px;
-    color:#fffdf5;
-    letter-spacing: 0.5px;
-    padding-left: 2px;
-  }
-
-  /* Right side */
   .header-right {
-    text-align:right;
-    display:flex;
-    flex-direction:column;
-    align-items:flex-end;
-    gap:10px;
+    text-align:right; display:flex;
+    flex-direction:column; align-items:flex-end; gap:10px;
   }
 
-  .week-pill {
-    font-family:'Antonio', sans-serif;
-    font-size:13px;
-    letter-spacing:2px;
-    color:var(--coral);
-    background:var(--coral-dim);
+  .period-pill {
+    font-family:'Antonio', sans-serif; font-size:12px; letter-spacing:2px;
+    color:var(--coral); background:var(--coral-dim);
     border:1px solid var(--cc-border);
-    padding:7px 18px;
-    border-radius:4px;
+    padding:7px 18px; border-radius:4px;
   }
 
   .client-tag {
     font-family:'Antonio', sans-serif;
-    font-size:26px;
-    letter-spacing:2px;
-    color:var(--cream);
+    font-size:26px; letter-spacing:2px; color:var(--cream);
   }
 
   .header-right p { font-size:12px; color:var(--text-m); letter-spacing:.5px; }
 
-  /* ── CAMP TABS ──────────────────────────────── */
-  .camp-tabs {
-    display:flex; gap:10px; margin-bottom:48px; flex-wrap:wrap;
+  /* ─── SECTION LABEL ─── */
+  .sec-lbl {
+    font-family:'Antonio', sans-serif; font-size:10px;
+    letter-spacing:2.5px; text-transform:uppercase;
+    color:var(--text-m); margin-bottom:14px; padding-left:2px;
   }
 
-  .camp-tab {
-    font-family:'Antonio', sans-serif;
-    font-size:13px; letter-spacing:2px; text-transform:uppercase;
-    padding:8px 22px; border-radius:6px; border:1px solid;
-    pointer-events:none;
-  }
-
-  .tab-cc { color:var(--cc); background:var(--cc-dim); border-color:var(--cc-border); }
-  .tab-ca { color:var(--ca); background:var(--ca-dim); border-color:var(--ca-border); }
-
-  .chip {
-    font-family:'Antonio', sans-serif;
-    font-size:11px; letter-spacing:1px;
-    padding:8px 16px; border-radius:20px;
-    color:var(--text-s); background:var(--surface2); border:1px solid var(--border);
-  }
-
-  /* ── CAMPAIGN SECTION ───────────────────────── */
-  .camp-section { margin-bottom:80px; }
-
-  .camp-header {
-    display:flex; align-items:center; gap:14px;
-    margin-bottom:24px; padding-bottom:20px;
-    border-bottom:1px solid var(--border);
-  }
-
-  .camp-label {
-    font-family:'Antonio', sans-serif;
-    font-size:28px; letter-spacing:3px;
-    padding:4px 20px; border-radius:5px;
-  }
-
-  .cc-section .camp-label { color:var(--cc); background:var(--cc-dim); border:1px solid var(--cc-border); }
-  .ca-section .camp-label { color:var(--ca); background:var(--ca-dim); border:1px solid var(--ca-border); }
-
-  /* ── KPI STRIP ──────────────────────────────── */
-  .kpi-strip {
+  /* ─── HERO KPI STRIP ─── */
+  .hero-strip {
     display:grid; grid-template-columns:repeat(4,1fr);
     gap:1px; background:var(--border);
-    border:1px solid var(--border); border-radius:12px;
-    overflow:hidden; margin-bottom:20px;
+    border:1px solid var(--border); border-radius:14px;
+    overflow:hidden; margin-bottom:52px;
   }
 
-  .kpi-cell { background:var(--surface); padding:18px 20px; }
-  .kpi-lbl  { font-size:10px; letter-spacing:1.5px; text-transform:uppercase; color:var(--text-m); margin-bottom:6px; }
-  .kpi-val  { font-family:'Antonio', sans-serif; font-size:28px; letter-spacing:.5px; line-height:1; }
-  .cc-section .kpi-val { color:var(--cc); }
-  .ca-section .kpi-val { color:var(--ca); }
-
-  /* ── SECTION LABEL ──────────────────────────── */
-  .sec-lbl {
-    font-family:'Antonio', sans-serif;
-    font-size:10px; letter-spacing:2.5px; text-transform:uppercase;
-    color:var(--text-m); margin-bottom:12px; padding-left:2px;
+  .hero-cell {
+    background:var(--surface); padding:26px 24px 22px;
+    position:relative; overflow:hidden;
   }
 
-  /* ── METRICS GRID ───────────────────────────── */
-  .metrics-grid {
-    display:grid;
-    grid-template-columns:repeat(auto-fill, minmax(155px,1fr));
-    gap:10px; margin-bottom:24px;
+  .hero-cell::before {
+    content:''; position:absolute;
+    bottom:0; left:0; right:0; height:2px;
   }
 
-  .mc {
-    background:var(--surface); border:1px solid var(--border);
-    border-radius:10px; padding:18px 16px 14px;
-    transition:border-color .2s, transform .2s;
-  }
-  .mc:hover { border-color:rgba(255,255,255,.12); transform:translateY(-2px); }
+  .hero-cell.hc-spend::before  { background:linear-gradient(90deg, var(--coral), transparent); }
+  .hero-cell.hc-chats::before  { background:linear-gradient(90deg, var(--green), transparent); }
+  .hero-cell.hc-cci::before    { background:linear-gradient(90deg, var(--gold), transparent); }
+  .hero-cell.hc-follow::before { background:linear-gradient(90deg, var(--ca), transparent); }
 
-  .mc-lbl  { font-size:10px; letter-spacing:1.5px; text-transform:uppercase; color:var(--text-m); margin-bottom:8px; }
-  .mc-val  { font-family:'Antonio', sans-serif; font-size:24px; color:var(--cream); line-height:1; margin-bottom:8px; }
-  .mc-note { display:flex; align-items:center; gap:5px; font-size:11px; color:var(--text-m); }
-
-  .dot { width:6px; height:6px; border-radius:50%; flex-shrink:0; }
-  .dot-g { background:var(--green); box-shadow:0 0 5px var(--green); }
-  .dot-y { background:var(--gold);  box-shadow:0 0 5px var(--gold); }
-  .dot-r { background:var(--red);   box-shadow:0 0 5px var(--red); }
-  .dot-n { background:var(--text-m); }
-
-  .mc-bar  { height:2px; background:var(--surface3); border-radius:2px; margin-top:10px; overflow:hidden; }
-  .mc-fill { height:100%; border-radius:2px; }
-
-  /* ── FUNNELS ────────────────────────────────── */
-  .funnels-row {
-    display:grid; gap:12px; margin-bottom:24px;
-  }
-  .funnels-2 { grid-template-columns:1fr 1fr; }
-
-  .funnel-card {
-    background:var(--surface); border:1px solid var(--border);
-    border-radius:12px; padding:22px 24px 52px;
-  }
-
-  .funnel-card-title {
-    font-family:'Antonio', sans-serif;
-    font-size:11px; letter-spacing:2px; text-transform:uppercase;
-    color:var(--text-m); margin-bottom:20px;
-    display:flex; align-items:center; gap:8px;
-  }
-
-  .funnel-bars { display:flex; align-items:flex-end; gap:8px; height:100px; }
-
-  .fb {
-    flex:1; border-radius:5px 5px 0 0;
-    position:relative; display:flex;
-    align-items:flex-start; justify-content:center;
-    padding-top:8px; min-width:0;
-    transition:filter .2s; cursor:default;
-  }
-  .fb:hover { filter:brightness(1.15); }
-
-  .fb-lbl {
-    font-family:'Antonio', sans-serif;
-    font-size:10px; letter-spacing:.8px; text-transform:uppercase;
-    color:rgba(255,253,245,.75); text-align:center;
-    line-height:1.2; padding:0 4px;
-  }
-
-  .fb-num {
-    position:absolute; bottom:-24px;
-    font-family:'Antonio', sans-serif;
-    font-size:14px; letter-spacing:.5px;
-    color:var(--text-s); white-space:nowrap;
-    left:50%; transform:translateX(-50%);
-  }
-
-  .fb-pct {
-    position:absolute; bottom:-40px;
-    font-size:10px; color:var(--text-m);
-    white-space:nowrap; left:50%; transform:translateX(-50%);
-  }
-
-  .funnel-cc-1 { background:rgba(255,102,77,.75); }
-  .funnel-cc-2 { background:rgba(255,102,77,.50); }
-  .funnel-cc-3 { background:rgba(255,102,77,.28); }
-  .funnel-ca-1 { background:rgba(152,128,223,.75); }
-  .funnel-ca-2 { background:rgba(152,128,223,.50); }
-  .funnel-ca-3 { background:rgba(152,128,223,.28); }
-  .funnel-vid-1 { background:rgba(79,158,255,.75); }
-  .funnel-vid-2 { background:rgba(79,158,255,.50); }
-  .funnel-vid-3 { background:rgba(79,158,255,.28); }
-
-  /* ── CREATIVE CARD ──────────────────────────── */
-  .creatives-row {
-    display:grid; grid-template-columns:1fr 1fr;
-    gap:12px; margin-bottom:14px;
-  }
-
-  .cc-card {
-    background:var(--surface); border:1px solid var(--border);
-    border-radius:12px; padding:20px; overflow:hidden;
-  }
-
-  .cc-card.best  { border-color:rgba(62,207,142,.2);  background:linear-gradient(140deg,rgba(62,207,142,.05) 0%,var(--surface) 55%); }
-  .cc-card.worst { border-color:rgba(255,79,106,.15); background:linear-gradient(140deg,rgba(255,79,106,.04) 0%,var(--surface) 55%); }
-  .cc-card.neutral{ border-color:rgba(152,128,223,.2); background:linear-gradient(140deg,rgba(152,128,223,.04) 0%,var(--surface) 55%); }
-
-  .cc-badge {
-    display:inline-flex; align-items:center; gap:6px;
-    font-family:'Antonio', sans-serif;
+  .hero-lbl  {
     font-size:10px; letter-spacing:1.5px; text-transform:uppercase;
-    padding:4px 11px; border-radius:20px; margin-bottom:11px;
-  }
-
-  .badge-b  { color:var(--green);  background:rgba(62,207,142,.1);   border:1px solid rgba(62,207,142,.25); }
-  .badge-w  { color:var(--red);    background:rgba(255,79,106,.1);   border:1px solid rgba(255,79,106,.2); }
-  .badge-ca { color:var(--ca);     background:rgba(152,128,223,.1);  border:1px solid rgba(152,128,223,.25); }
-
-  .cc-link {
-    display:block; font-size:11px; color:rgba(255,102,77,.8);
-    text-decoration:none; word-break:break-all;
-    line-height:1.5; margin-bottom:3px;
-  }
-  .cc-link:hover { color:var(--coral); text-decoration:underline; }
-
-  .cc-period { font-size:10px; color:var(--text-m); margin-bottom:14px; }
-
-  .cc-stats   { display:grid; grid-template-columns:repeat(3,1fr); gap:7px; }
-  .cc-stats-4 { display:grid; grid-template-columns:repeat(4,1fr); gap:7px; }
-
-  .cs { background:var(--surface2); border-radius:7px; padding:8px 9px; }
-  .cs-lbl { font-size:9px; letter-spacing:1px; text-transform:uppercase; color:var(--text-m); margin-bottom:3px; }
-  .cs-val { font-family:'Antonio', sans-serif; font-size:15px; color:var(--cream); }
-
-  /* ── ALL CREATIVES ──────────────────────────── */
-  .all-cc {
-    background:var(--surface); border:1px solid var(--border);
-    border-radius:12px; padding:15px 18px;
-  }
-
-  .all-cc-title {
-    font-family:'Antonio', sans-serif; font-size:10px;
-    letter-spacing:2px; text-transform:uppercase;
     color:var(--text-m); margin-bottom:10px;
   }
 
-  .links-wrap { display:flex; flex-wrap:wrap; gap:7px; }
-
-  .lc {
-    font-size:11px; color:var(--text-s);
-    background:var(--surface2); border:1px solid var(--border);
-    border-radius:5px; padding:4px 11px;
-    text-decoration:none; transition:color .2s, border-color .2s;
-  }
-  .lc:hover { color:var(--coral); border-color:rgba(255,102,77,.3); }
-
-  /* ── ALERT ──────────────────────────────────── */
-  .alert {
-    display:flex; align-items:flex-start; gap:12px;
-    background:rgba(255,79,106,.06); border:1px solid rgba(255,79,106,.22);
-    border-radius:10px; padding:13px 18px; margin-bottom:20px;
-  }
-  .alert-icon  { font-size:16px; flex-shrink:0; margin-top:2px; }
-  .alert-title { font-family:'Antonio', sans-serif; font-size:12px; letter-spacing:1px; color:var(--red); margin-bottom:3px; }
-  .alert-body  { font-size:12px; color:var(--text-s); line-height:1.5; }
-
-  /* ── CA PERIOD HEADER ───────────────────────── */
-  .period-header {
-    display:flex; align-items:center; gap:12px;
-    margin-bottom:14px; margin-top:24px;
+  .hero-val {
+    font-family:'Antonio', sans-serif; font-size:38px;
+    letter-spacing:.5px; line-height:1;
   }
 
-  .period-pill {
-    font-family:'Antonio', sans-serif;
-    font-size:11px; letter-spacing:1.5px; text-transform:uppercase;
-    padding:5px 14px; border-radius:20px;
-    color:var(--ca); background:var(--ca-dim); border:1px solid var(--ca-border);
+  .hc-spend  .hero-val { color:var(--coral); }
+  .hc-chats  .hero-val { color:var(--green); }
+  .hc-cci    .hero-val { color:var(--gold); }
+  .hc-follow .hero-val { color:var(--ca); }
+
+  .hero-note {
+    margin-top:8px; font-size:11px; color:var(--text-m);
   }
 
-  .period-line { flex:1; height:1px; background:var(--border); }
+  /* ─── 2-COL LAYOUT ─── */
+  .two-col { display:grid; grid-template-columns:1fr 1fr; gap:12px; margin-bottom:12px; }
+  .one-col  { margin-bottom:12px; }
 
-  /* ── DIVIDER ────────────────────────────────── */
+  /* ─── CHART CARD ─── */
+  .chart-card {
+    background:var(--surface); border:1px solid var(--border);
+    border-radius:14px; padding:28px 28px 24px;
+  }
+
+  .chart-title {
+    font-family:'Antonio', sans-serif; font-size:13px;
+    letter-spacing:2px; text-transform:uppercase;
+    color:var(--text-s); margin-bottom:24px;
+    display:flex; align-items:center; gap:10px;
+  }
+
+  .chart-title-dot {
+    width:8px; height:8px; border-radius:50%;
+  }
+
+  /* ─── BAR CHART ─── */
+  .bar-chart { display:flex; align-items:flex-end; gap:0; height:130px; }
+
+  .month-col {
+    flex:1; display:flex; flex-direction:column;
+    align-items:center; gap:0; position:relative;
+  }
+
+  .bar-group { display:flex; align-items:flex-end; gap:3px; width:100%; justify-content:center; }
+
+  .bar {
+    border-radius:4px 4px 0 0;
+    min-height:4px; flex:1; max-width:28px;
+    position:relative; cursor:default;
+    transition:filter .2s, transform .2s;
+  }
+  .bar:hover { filter:brightness(1.2); transform:scaleY(1.03); transform-origin:bottom; }
+
+  .bar-cc { background:linear-gradient(180deg, rgba(255,102,77,1), rgba(255,102,77,.55)); }
+  .bar-ca { background:linear-gradient(180deg, rgba(152,128,223,1), rgba(152,128,223,.55)); }
+
+  .month-label {
+    font-family:'Antonio', sans-serif; font-size:10px;
+    letter-spacing:1.5px; color:var(--text-m);
+    text-transform:uppercase;
+    margin-top:8px; text-align:center;
+  }
+
+  .bar-val {
+    position:absolute; top:-20px; left:50%;
+    transform:translateX(-50%);
+    font-family:'Antonio', sans-serif; font-size:10px;
+    color:var(--text-s); white-space:nowrap;
+  }
+
+  /* ─── TREND TABLE ─── */
+  .trend-table { width:100%; border-collapse:collapse; margin-top:4px; }
+  .trend-table th {
+    font-family:'Antonio', sans-serif; font-size:10px;
+    letter-spacing:1.5px; text-transform:uppercase;
+    color:var(--text-m); padding:8px 12px;
+    border-bottom:1px solid var(--border);
+    text-align:left;
+  }
+  .trend-table td {
+    font-family:'Antonio', sans-serif; font-size:14px;
+    color:var(--cream); padding:12px 12px;
+    border-bottom:1px solid var(--border);
+    letter-spacing:.3px;
+  }
+  .trend-table tr:last-child td { border-bottom:none; }
+  .trend-table tr:hover td { background:var(--surface2); }
+
+  .trend-month { color:var(--text-s) !important; font-size:12px !important; }
+  .trend-best  { color:var(--green) !important; }
+  .trend-alert { color:var(--red) !important; }
+  .trend-mid   { color:var(--gold) !important; }
+
+  .delta {
+    display:inline-flex; align-items:center; gap:3px;
+    font-size:11px; padding:2px 7px; border-radius:10px;
+  }
+  .delta-up   { color:var(--green); background:rgba(62,207,142,.12); }
+  .delta-down { color:var(--red);   background:rgba(255,79,106,.12); }
+
+  /* ─── CREATIVE CARDS ─── */
+  .creative-grid-3 {
+    display:grid; grid-template-columns:repeat(3,1fr); gap:10px;
+    margin-bottom:10px;
+  }
+
+  .creative-card {
+    background:var(--surface); border:1px solid var(--border);
+    border-radius:12px; overflow:hidden;
+    transition:border-color .2s, transform .2s;
+  }
+  .creative-card:hover { transform:translateY(-3px); }
+  .creative-card.top1 { border-color:rgba(255,102,77,.35); }
+  .creative-card.top1-ca { border-color:rgba(152,128,223,.35); }
+
+  .cc-top {
+    padding:12px 16px 10px;
+    display:flex; justify-content:space-between; align-items:center;
+    border-bottom:1px solid var(--border);
+    background:var(--surface2);
+  }
+
+  .cc-badge {
+    font-family:'Antonio', sans-serif; font-size:9px;
+    letter-spacing:1.5px; text-transform:uppercase;
+    padding:3px 9px; border-radius:8px;
+  }
+
+  .badge-cc1 { color:var(--cc); background:var(--cc-dim); border:1px solid var(--cc-border); }
+  .badge-cc2 { color:var(--text-s); background:rgba(255,255,255,.05); border:1px solid var(--border); }
+  .badge-ca1 { color:var(--ca); background:var(--ca-dim); border:1px solid var(--ca-border); }
+  .badge-ca2 { color:var(--text-s); background:rgba(255,255,255,.05); border:1px solid var(--border); }
+
+  .cc-rank {
+    font-family:'Antonio', sans-serif; font-size:11px;
+    letter-spacing:1px; color:var(--text-m);
+  }
+
+  .cc-body { padding:16px 16px 14px; }
+
+  .cc-stat-row { display:flex; gap:16px; flex-wrap:wrap; margin-bottom:14px; }
+
+  .cs { display:flex; flex-direction:column; gap:3px; }
+  .cs-lbl { font-size:9px; letter-spacing:1.5px; text-transform:uppercase; color:var(--text-m); }
+  .cs-val { font-family:'Antonio', sans-serif; font-size:20px; color:var(--cream); line-height:1; }
+  .cs-val.v-cc { color:var(--cc); }
+  .cs-val.v-ca { color:var(--ca); }
+  .cs-val.v-g  { color:var(--green); }
+
+  .cc-link {
+    display:inline-flex; align-items:center; gap:5px;
+    font-family:'Antonio', sans-serif; font-size:9px;
+    letter-spacing:1.5px; text-transform:uppercase;
+    color:var(--text-s); text-decoration:none;
+    padding:6px 12px; border-radius:5px;
+    border:1px solid var(--border);
+    transition:border-color .2s, color .2s, background .2s;
+  }
+  .cc-link:hover { color:var(--cream); border-color:rgba(255,255,255,.2); background:var(--surface2); }
+
+  /* ─── POSTS ALCANCE ─── */
+  .posts-grid {
+    display:grid; grid-template-columns:repeat(3,1fr); gap:10px;
+  }
+
+  .post-card {
+    background:var(--surface); border:1px solid var(--border);
+    border-radius:12px; padding:18px 18px 16px;
+    display:flex; flex-direction:column; gap:14px;
+    transition:border-color .2s, transform .2s;
+  }
+  .post-card:hover { transform:translateY(-2px); border-color:rgba(255,255,255,.14); }
+
+  .post-rank {
+    font-family:'Antonio', sans-serif; font-size:10px;
+    letter-spacing:2px; text-transform:uppercase;
+    color:var(--text-m); display:flex; align-items:center; gap:8px;
+  }
+
+  .post-rank-num {
+    font-family:'Antonio', sans-serif; font-size:22px;
+    color:var(--coral); line-height:1;
+  }
+
+  .post-link {
+    display:inline-flex; align-items:center; gap:6px;
+    font-family:'Antonio', sans-serif; font-size:9px;
+    letter-spacing:1.5px; text-transform:uppercase;
+    color:var(--text-s); text-decoration:none;
+    padding:7px 14px; border-radius:6px;
+    border:1px solid var(--border);
+    transition:border-color .2s, color .2s, background .2s;
+    width:fit-content;
+  }
+  .post-link:hover { color:var(--cream); border-color:rgba(255,255,255,.2); background:var(--surface2); }
+
+  /* ─── DIVIDER ─── */
   .divider {
     position:relative; height:1px;
-    background:var(--border); margin:64px 0;
+    background:var(--border); margin:56px 0;
   }
   .divider::before {
-    content:'ELEVENT';
-    position:absolute; left:50%; top:50%;
+    content:'ELEVENT'; position:absolute; left:50%; top:50%;
     transform:translate(-50%,-50%);
     font-family:'Antonio', sans-serif;
     font-size:10px; letter-spacing:4px; color:var(--text-m);
     background:var(--bg); padding:0 20px;
   }
 
-  /* ── FOOTER ─────────────────────────────────── */
+  /* ─── FOOTER ─── */
   footer {
     margin-top:64px; padding-top:24px;
     border-top:1px solid var(--border);
     display:flex; justify-content:space-between;
     align-items:center; flex-wrap:wrap; gap:16px;
   }
-
   footer p { font-family:'Antonio', sans-serif; font-size:11px; letter-spacing:2px; color:var(--text-m); text-transform:uppercase; }
-
   .legend { display:flex; gap:18px; flex-wrap:wrap; }
   .leg    { display:flex; align-items:center; gap:6px; font-size:11px; color:var(--text-m); }
+  .dot { width:6px; height:6px; border-radius:50%; flex-shrink:0; }
+  .dot-cc { background:var(--cc); }
+  .dot-ca { background:var(--ca); }
 
-  /* ── RESPONSIVE ─────────────────────────────── */
-  @media (max-width:768px) {
+  /* ─── RESPONSIVE ─── */
+  @media (max-width:900px) {
+    .creative-grid-3 { grid-template-columns:1fr 1fr; }
+    .posts-grid { grid-template-columns:1fr 1fr; }
+  }
+  @media (max-width:680px) {
     .page { padding:28px 16px 60px; }
     .header { grid-template-columns:1fr; }
-    .kpi-strip { grid-template-columns:1fr 1fr; }
-    .funnels-2 { grid-template-columns:1fr; }
-    .creatives-row { grid-template-columns:1fr; }
-    .metrics-grid { grid-template-columns:repeat(2,1fr); }
-    .cc-stats-4 { grid-template-columns:repeat(2,1fr); }
+    .hero-strip { grid-template-columns:1fr 1fr; }
+    .two-col { grid-template-columns:1fr; }
+    .creative-grid-3, .posts-grid { grid-template-columns:1fr; }
   }
 </style>
 </head>
 <body>
 <div class="page">
 
-  <!-- ══ HEADER ══ -->
+  <!-- HEADER -->
   <header class="header">
     <div class="logo-block">
-      <!-- Logo Elevent fiel ao arquivo original -->
       <div class="logo-svg-wrap">
   <img 
     src="image-removebg-preview.png" 
@@ -407,317 +379,380 @@
     style="display:block;"
   >
 </div>
-      <p class="header-sub">ANÁLISE DE PERFORMANCE · GESTÃO DE TRÁFEGO PAGO</p>
+      <p class="header-sub">Análise de performance · gestão de tráfego pago</p>
     </div>
-
     <div class="header-right">
-      <div class="week-pill">02/03 — 08/03/2025</div>
-      <p>semana de referência</p>
-      <div class="client-tag">Las Quebradas</div>
+      <div class="period-pill">NOV 2024 — FEV 2025</div>
+      <p>período de referência</p>
+      <div class="client-tag">Visão Geral</div>
     </div>
   </header>
 
-  <!-- tabs -->
-  <div class="camp-tabs">
-    <div class="camp-tab tab-cc">CC — Conversão</div>
-    <div class="camp-tab tab-ca">CA — Atração</div>
-    <div class="chip">💰 Verba CC: R$14/dia</div>
-    <div class="chip">📣 Verba CA: R$12/dia</div>
+
+  <!-- ══ HERO KPIs ══ -->
+  <p class="sec-lbl">Resultados acumulados · 4 meses</p>
+  <div class="hero-strip">
+    <div class="hero-cell hc-spend">
+      <div class="hero-lbl">Valor Investido</div>
+      <div class="hero-val">R$2.442</div>
+      <div class="hero-note">total · conversão + atração</div>
+    </div>
+    <div class="hero-cell hc-chats">
+      <div class="hero-lbl">Chats Iniciados</div>
+      <div class="hero-val">644</div>
+      <div class="hero-note">total acumulado</div>
+    </div>
+    <div class="hero-cell hc-cci">
+      <div class="hero-lbl">CCI Médio</div>
+      <div class="hero-val">R$3,70</div>
+      <div class="hero-note">custo por conversa iniciada</div>
+    </div>
+    <div class="hero-cell hc-follow">
+      <div class="hero-lbl">Novos Seguidores</div>
+      <div class="hero-val">483</div>
+      <div class="hero-note">total acumulado</div>
+    </div>
   </div>
 
 
-  <!-- ══════════════════════════════════════════
-       CC — CONVERSÃO
-  ══════════════════════════════════════════ -->
-  <section class="camp-section cc-section">
+  <!-- ══ EVOLUÇÃO MENSAL ══ -->
+  <p class="sec-lbl">Evolução mensal</p>
+  <div class="two-col" style="margin-bottom:12px;">
 
-    <div class="camp-header">
-      <div class="camp-label">Conversão</div>
-    </div>
-
-    <div class="kpi-strip">
-      <div class="kpi-cell"><div class="kpi-lbl">Conversas iniciadas</div><div class="kpi-val">12</div></div>
-      <div class="kpi-cell"><div class="kpi-lbl">CCI</div><div class="kpi-val">R$6,85</div></div>
-      <div class="kpi-cell"><div class="kpi-lbl">Impressões</div><div class="kpi-val">6.709</div></div>
-      <div class="kpi-cell"><div class="kpi-lbl">Verba usada</div><div class="kpi-val">R$81,81</div></div>
-    </div>
-
-    <p class="sec-lbl">Métricas gerais</p>
-    <div class="metrics-grid">
-      <div class="mc">
-        <div class="mc-lbl">CCI</div><div class="mc-val">R$6,85</div>
-        <div class="mc-note"><span class="dot dot-g"></span>ideal R$9,00 — ótimo</div>
-        <div class="mc-bar"><div class="mc-fill" style="width:76%;background:var(--green)"></div></div>
+    <!-- Gráfico conversas -->
+    <div class="chart-card">
+      <div class="chart-title">
+        <span class="chart-title-dot" style="background:var(--cc)"></span>
+        Conversas iniciadas por mês
       </div>
-      <div class="mc">
-        <div class="mc-lbl">CPM</div><div class="mc-val">R$12,19</div>
-        <div class="mc-note"><span class="dot dot-y"></span>ideal R$10,60 — acima</div>
-        <div class="mc-bar"><div class="mc-fill" style="width:52%;background:var(--gold)"></div></div>
-      </div>
-      <div class="mc">
-        <div class="mc-lbl">CPC</div><div class="mc-val">R$2,15</div>
-        <div class="mc-note"><span class="dot dot-g"></span>ideal R$2,50 — bom</div>
-        <div class="mc-bar"><div class="mc-fill" style="width:74%;background:var(--green)"></div></div>
-      </div>
-      <div class="mc">
-        <div class="mc-lbl">CTR</div><div class="mc-val">0,57%</div>
-        <div class="mc-note"><span class="dot dot-g"></span>ideal 0,50% — acima</div>
-        <div class="mc-bar"><div class="mc-fill" style="width:80%;background:var(--green)"></div></div>
-      </div>
-      <div class="mc">
-        <div class="mc-lbl">Cliques no link</div><div class="mc-val">38</div>
-        <div class="mc-note"><span class="dot dot-n"></span>—</div>
-        <div class="mc-bar"><div class="mc-fill" style="width:50%;background:var(--cc)"></div></div>
-      </div>
-      <div class="mc">
-        <div class="mc-lbl">Retenção vídeo</div><div class="mc-val">52,87%</div>
-        <div class="mc-note"><span class="dot dot-g"></span>VV 50%: 968</div>
-        <div class="mc-bar"><div class="mc-fill" style="width:78%;background:var(--green)"></div></div>
-      </div>
-    </div>
-
-    <p class="sec-lbl" style="margin-top:4px;">Funis de performance</p>
-    <div class="funnels-row funnels-2">
-      <div class="funnel-card">
-        <div class="funnel-card-title"><span>💬</span> Funil de Conversas</div>
-        <div class="funnel-bars">
-          <div class="fb funnel-cc-1" style="height:100%;">
-            <span class="fb-lbl">Impressões</span>
-            <span class="fb-num">6.709</span><span class="fb-pct">100%</span>
+      <div class="bar-chart" style="margin-bottom:12px;">
+        <!-- Nov: 80 (max 240) -->
+        <div class="month-col">
+          <div class="bar-group">
+            <div class="bar bar-cc" style="height:calc(130px * 80/240); position:relative;">
+              <span class="bar-val">80</span>
+            </div>
           </div>
-          <div class="fb funnel-cc-2" style="height:0.57%;">
-            <span class="fb-lbl">Cliques</span>
-            <span class="fb-num">38</span><span class="fb-pct">0,57%</span>
-          </div>
-          <div class="fb funnel-cc-3" style="height:0.18%;">
-            <span class="fb-lbl">Conversas</span>
-            <span class="fb-num">12</span><span class="fb-pct">0,18%</span>
-          </div>
+          <div class="month-label">NOV</div>
         </div>
-      </div>
-      <div class="funnel-card">
-        <div class="funnel-card-title"><span>🎬</span> Funil de Vídeo</div>
-        <div class="funnel-bars">
-          <div class="fb funnel-vid-1" style="height:100%;">
-            <span class="fb-lbl">Impressões</span>
-            <span class="fb-num">6.709</span><span class="fb-pct">100%</span>
+        <!-- Dez: 177 -->
+        <div class="month-col">
+          <div class="bar-group">
+            <div class="bar bar-cc" style="height:calc(130px * 177/240); position:relative;">
+              <span class="bar-val">177</span>
+            </div>
           </div>
-          <div class="fb funnel-vid-2" style="height:27.3%;">
-            <span class="fb-lbl">VV 3s</span>
-            <span class="fb-num">1.831</span><span class="fb-pct">27,3%</span>
+          <div class="month-label">DEZ</div>
+        </div>
+        <!-- Jan: 240 -->
+        <div class="month-col">
+          <div class="bar-group">
+            <div class="bar bar-cc" style="height:calc(130px * 240/240); position:relative;">
+              <span class="bar-val">240</span>
+            </div>
           </div>
-          <div class="fb funnel-vid-3" style="height:14.4%;">
-            <span class="fb-lbl">VV 50%</span>
-            <span class="fb-num">968</span><span class="fb-pct">14,4%</span>
+          <div class="month-label">JAN</div>
+        </div>
+        <!-- Fev: 113 -->
+        <div class="month-col">
+          <div class="bar-group">
+            <div class="bar bar-cc" style="height:calc(130px * 113/240); position:relative;">
+              <span class="bar-val">113</span>
+            </div>
           </div>
+          <div class="month-label">FEV</div>
         </div>
       </div>
     </div>
 
-   <p class="sec-lbl">Análise de criativos</p>
-    <div class="creatives-row">
-      <div class="cc-card best">
-        <div class="cc-badge badge-b">★ Melhor criativo</div>
-        <a class="cc-link" href="https://www.instagram.com/p/DUXG4xEAEMf/" target="_blank">instagram.com/p/DUXG4xEAEMf/</a>
-        <div class="cc-period">período da campanha</div>
-        <div class="cc-stats">
-          <div class="cs"><div class="cs-lbl">Conversas</div><div class="cs-val" style="color:var(--green)">2</div></div>
-          <div class="cs"><div class="cs-lbl">CCI</div><div class="cs-val" style="color:var(--green)">R$0,85</div></div>
-          <div class="cs"><div class="cs-lbl">CTR</div><div class="cs-val">0,67%</div></div>
-          <div class="cs"><div class="cs-lbl">CPM</div><div class="cs-val">R$11,19</div></div>
-          <div class="cs"><div class="cs-lbl">CPC</div><div class="cs-val">R$1,70</div></div>
-          <div class="cs"><div class="cs-lbl">Retenção</div><div class="cs-val">44,0%</div></div>
-          <div class="cs"><div class="cs-lbl">Valor usado</div><div class="cs-val">R$1,70</div></div>
-        </div>
+    <!-- Gráfico seguidores -->
+    <div class="chart-card">
+      <div class="chart-title">
+        <span class="chart-title-dot" style="background:var(--ca)"></span>
+        Novos seguidores por mês
       </div>
-      <div class="cc-card worst">
-        <div class="cc-badge badge-w">▼ Pior criativo</div>
-        <a class="cc-link" href="https://www.instagram.com/p/DVtnr5KgDvR/" target="_blank">instagram.com/p/DVtnr5KgDvR/</a>
-        <div class="cc-period">06/03 → 08/03</div>
-        <div class="cc-stats">
-          <div class="cs"><div class="cs-lbl">Conversas</div><div class="cs-val" style="color:var(--text-m)">—</div></div>
-          <div class="cs"><div class="cs-lbl">CCI</div><div class="cs-val" style="color:var(--text-m)">—</div></div>
-          <div class="cs"><div class="cs-lbl">CTR</div><div class="cs-val">0,66%</div></div>
-          <div class="cs"><div class="cs-lbl">CPM</div><div class="cs-val">R$10,48</div></div>
-          <div class="cs"><div class="cs-lbl">CPC</div><div class="cs-val">R$1,59</div></div>
-          <div class="cs"><div class="cs-lbl">Retenção</div><div class="cs-val">38,49%</div></div>
-          <div class="cs"><div class="cs-lbl">Valor usado</div><div class="cs-val">R$11,13</div></div>
+      <div class="bar-chart" style="margin-bottom:12px;">
+        <!-- Nov: 63 (max 256) -->
+        <div class="month-col">
+          <div class="bar-group">
+            <div class="bar bar-ca" style="height:calc(130px * 63/256); position:relative;">
+              <span class="bar-val">63</span>
+            </div>
+          </div>
+          <div class="month-label">NOV</div>
+        </div>
+        <!-- Dez: 135 -->
+        <div class="month-col">
+          <div class="bar-group">
+            <div class="bar bar-ca" style="height:calc(130px * 135/256); position:relative;">
+              <span class="bar-val">135</span>
+            </div>
+          </div>
+          <div class="month-label">DEZ</div>
+        </div>
+        <!-- Jan: 256 -->
+        <div class="month-col">
+          <div class="bar-group">
+            <div class="bar bar-ca" style="height:calc(130px * 256/256); position:relative;">
+              <span class="bar-val">256</span>
+            </div>
+          </div>
+          <div class="month-label">JAN</div>
+        </div>
+        <!-- Fev: 69 -->
+        <div class="month-col">
+          <div class="bar-group">
+            <div class="bar bar-ca" style="height:calc(130px * 69/256); position:relative;">
+              <span class="bar-val">69</span>
+            </div>
+          </div>
+          <div class="month-label">FEV</div>
         </div>
       </div>
     </div>
 
-    <div class="all-cc">
-      <div class="all-cc-title">Todos os criativos ativos no período</div>
-      <div class="links-wrap">
-        <a class="lc" href="https://www.instagram.com/p/DVAS8wSgGhh/"  target="_blank">DVAS8wSgGhh</a>
-        <a class="lc" href="https://www.instagram.com/p/DVtnrxFgLN9/"  target="_blank">DVtnrxFgLN9</a>
-        <a class="lc" href="https://www.instagram.com/p/DVhxSDlgKBo/"  target="_blank">DVhxSDlgKBo</a>
-        <a class="lc" href="https://www.instagram.com/p/DUXG34wAMLf/"  target="_blank">DUXG34wAMLf</a>
-        <a class="lc" href="https://www.instagram.com/p/DVtnrG3gDfG/"  target="_blank">DVtnrG3gDfG</a>
-        <a class="lc" href="https://www.instagram.com/p/DVKl7xOAO05/"  target="_blank">DVKl7xOAO05</a>
-      </div>
-    </div>
+  </div>
 
-  </section>
+  <!-- Tabela mensal detalhada -->
+  <div class="one-col">
+    <div class="chart-card" style="padding:0; overflow:hidden;">
+      <table class="trend-table">
+        <thead>
+          <tr>
+            <th>Mês</th>
+            <th>Verba total</th>
+            <th>Conversas</th>
+            <th>CCI</th>
+            <th>Seguidores</th>
+            <th>Custo/seguidor</th>
+            <th style="text-align:right;">Tendência</th>
+          </tr>
+        </thead>
+        <tbody>
+          <!-- Novembro -->
+          <tr>
+            <td class="trend-month">Novembro</td>
+            <td>R$455,95</td>
+            <td>80</td>
+            <td class="trend-alert">R$5,70</td>
+            <td>63</td>
+            <td class="trend-alert">R$7,24</td>
+            <td style="text-align:right;">
+              <span class="delta delta-down">— início</span>
+            </td>
+          </tr>
+          <!-- Dezembro -->
+          <tr>
+            <td class="trend-month">Dezembro</td>
+            <td>R$740,60</td>
+            <td>177</td>
+            <td class="trend-mid">R$4,18</td>
+            <td>135</td>
+            <td class="trend-mid">R$5,49</td>
+            <td style="text-align:right;">
+              <span class="delta delta-up">↑ +121% chats</span>
+            </td>
+          </tr>
+          <!-- Janeiro -->
+          <tr>
+            <td class="trend-month">Janeiro</td>
+            <td>R$684,14</td>
+            <td>240</td>
+            <td class="trend-best">R$2,85</td>
+            <td>256</td>
+            <td class="trend-best">R$2,67</td>
+            <td style="text-align:right;">
+              <span class="delta delta-up">↑ melhor mês</span>
+            </td>
+          </tr>
+          <!-- Fevereiro -->
+          <tr>
+            <td class="trend-month">Fevereiro</td>
+            <td>R$385,55</td>
+            <td>113</td>
+            <td class="trend-mid">R$3,41</td>
+            <td>69</td>
+            <td class="trend-mid">R$5,59</td>
+            <td style="text-align:right;">
+              <span class="delta delta-down">↓ verba menor</span>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
 
   <div class="divider"></div>
 
-  <!-- ══════════════════════════════════════════
-       CA — ATRAÇÃO
-  ══════════════════════════════════════════ -->
-  <section class="camp-section ca-section">
 
-    <div class="camp-header">
-      <div class="camp-label">Atração</div>
-    </div>
+  <!-- ══ MELHORES CRIATIVOS — CONVERSÃO ══ -->
+  <p class="sec-lbl">Melhores criativos · campanha de conversão (CC)</p>
+  <div class="creative-grid-3" style="margin-bottom:40px;">
 
-    <div class="kpi-strip">
-      <div class="kpi-cell"><div class="kpi-lbl">Novos seguidores</div><div class="kpi-val">51</div></div>
-      <div class="kpi-cell"><div class="kpi-lbl">Custo / seguidor</div><div class="kpi-val">R$1,53</div></div>
-      <div class="kpi-cell"><div class="kpi-lbl">Impressões</div><div class="kpi-val">13.142</div></div>
-      <div class="kpi-cell"><div class="kpi-lbl">Verba usada</div><div class="kpi-val">R$77,87</div></div>
-    </div>
-
-    <div class="alert">
-      <span class="alert-icon">⚠️</span>
-      <div>
-        <div class="alert-title">CPM e custo por seguidor acima do ideal</div>
-        <div class="alert-body">CPM de R$5,93 está acima do ideal de R$4,70. Custo por seguidor de R$1,53 também supera o ideal de R$1,35. Recomendado testar variações de criativos e ajustar a segmentação para melhorar a eficiência da entrega.</div>
+    <!-- 1º -->
+    <div class="creative-card top1">
+      <div class="cc-top">
+        <span class="cc-badge badge-cc1">🏆 #1 CC</span>
+        <span class="cc-rank">218 conversas</span>
       </div>
-    </div>
-
-    <p class="sec-lbl">Métricas gerais</p>
-    <div class="metrics-grid">
-      <div class="mc">
-        <div class="mc-lbl">Custo / seguidor</div><div class="mc-val">R$1,53</div>
-        <div class="mc-note"><span class="dot dot-r"></span>ideal R$1,35 — alto</div>
-        <div class="mc-bar"><div class="mc-fill" style="width:40%;background:var(--red)"></div></div>
-      </div>
-      <div class="mc">
-        <div class="mc-lbl">CPM</div><div class="mc-val">R$5,93</div>
-        <div class="mc-note"><span class="dot dot-r"></span>ideal R$4,70 — alto</div>
-        <div class="mc-bar"><div class="mc-fill" style="width:35%;background:var(--red)"></div></div>
-      </div>
-      <div class="mc">
-        <div class="mc-lbl">CPC</div><div class="mc-val">R$0,25</div>
-        <div class="mc-note"><span class="dot dot-g"></span>ideal R$0,25 — exato</div>
-        <div class="mc-bar"><div class="mc-fill" style="width:100%;background:var(--green)"></div></div>
-      </div>
-      <div class="mc">
-        <div class="mc-lbl">CTR</div><div class="mc-val">2,38%</div>
-        <div class="mc-note"><span class="dot dot-g"></span>ideal 1,65% — ótimo</div>
-        <div class="mc-bar"><div class="mc-fill" style="width:90%;background:var(--green)"></div></div>
-      </div>
-      <div class="mc">
-        <div class="mc-lbl">Visitas ao perfil</div><div class="mc-val">316</div>
-        <div class="mc-note"><span class="dot dot-n"></span>—</div>
-        <div class="mc-bar"><div class="mc-fill" style="width:60%;background:var(--ca)"></div></div>
-      </div>
-      <div class="mc">
-        <div class="mc-lbl">Retenção vídeo</div><div class="mc-val">54,96%</div>
-        <div class="mc-note"><span class="dot dot-g"></span>VV 50%: 2.138</div>
-        <div class="mc-bar"><div class="mc-fill" style="width:80%;background:var(--green)"></div></div>
-      </div>
-    </div>
-
-    <p class="sec-lbl" style="margin-top:4px;">Funis de performance</p>
-    <div class="funnels-row funnels-2">
-      <div class="funnel-card">
-        <div class="funnel-card-title"><span>👥</span> Funil de Seguidores</div>
-        <div class="funnel-bars">
-          <div class="fb funnel-ca-1" style="height:100%;">
-            <span class="fb-lbl">Impressões</span>
-            <span class="fb-num">13.142</span><span class="fb-pct">100%</span>
-          </div>
-          <div class="fb funnel-ca-2" style="height:2.4%;">
-            <span class="fb-lbl">Visitas perfil</span>
-            <span class="fb-num">316</span><span class="fb-pct">2,4%</span>
-          </div>
-          <div class="fb funnel-ca-3" style="height:0.4%;">
-            <span class="fb-lbl">Novos seg.</span>
-            <span class="fb-num">51</span><span class="fb-pct">0,4%</span>
-          </div>
+      <div class="cc-body">
+        <div class="cc-stat-row">
+          <div class="cs"><span class="cs-lbl">Conversas</span><span class="cs-val v-cc">218</span></div>
+          <div class="cs"><span class="cs-lbl">Custo/conversa</span><span class="cs-val v-g">R$1,85</span></div>
         </div>
+        <a class="cc-link" href="https://www.instagram.com/p/DSFcWHijBvD/" target="_blank">
+          <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+          Ver anúncio
+        </a>
       </div>
-      <div class="funnel-card">
-        <div class="funnel-card-title"><span>🎬</span> Funil de Vídeo</div>
-        <div class="funnel-bars">
-          <div class="fb funnel-vid-1" style="height:100%;">
-            <span class="fb-lbl">Impressões</span>
-            <span class="fb-num">13.142</span><span class="fb-pct">100%</span>
-          </div>
-          <div class="fb funnel-vid-2" style="height:29.6%;">
-            <span class="fb-lbl">VV 3s</span>
-            <span class="fb-num">3.890</span><span class="fb-pct">29,6%</span>
-          </div>
-          <div class="fb funnel-vid-3" style="height:16.3%;">
-            <span class="fb-lbl">VV 50%</span>
-            <span class="fb-num">2.138</span><span class="fb-pct">16,3%</span>
-          </div>
+    </div>
+
+    <!-- 2º -->
+    <div class="creative-card">
+      <div class="cc-top">
+        <span class="cc-badge badge-cc2">2º CC</span>
+        <span class="cc-rank">81 conversas</span>
+      </div>
+      <div class="cc-body">
+        <div class="cc-stat-row">
+          <div class="cs"><span class="cs-lbl">Conversas</span><span class="cs-val">81</span></div>
+          <div class="cs"><span class="cs-lbl">Custo/conversa</span><span class="cs-val v-g">R$1,25</span></div>
         </div>
+        <a class="cc-link" href="https://www.instagram.com/p/DTK-k_FjE9n/" target="_blank">
+          <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+          Ver anúncio
+        </a>
       </div>
     </div>
 
-    <!-- CA CREATIVES — sem comparação, apenas dois períodos do mesmo criativo -->
-    <p class="sec-lbl" style="margin-top:4px;">Criativo em veiculação</p>
-
-    <!-- Período 1 -->
-    <div class="period-header">
-      <div class="period-pill">Período 1 — 02/03 → 06/03</div>
-      <div class="period-line"></div>
-    </div>
-
-    <div style="margin-bottom:14px;">
-      <div class="cc-card neutral">
-        <div class="cc-badge badge-ca">📅 02/03 → 06/03</div>
-        <a class="cc-link" href="https://www.instagram.com/p/DVjaiuGgFvn/" target="_blank">instagram.com/p/DVjaiuGgFvn/</a>
-        <div class="cc-period">Criativo inicial · R$48,86 investidos</div>
-        <div class="cc-stats-4">
-          <div class="cs"><div class="cs-lbl">Seguidores</div><div class="cs-val" style="color:var(--ca)">35</div></div>
-          <div class="cs"><div class="cs-lbl">Custo/seg.</div><div class="cs-val">R$1,40</div></div>
-          <div class="cs"><div class="cs-lbl">Impressões</div><div class="cs-val">8.673</div></div>
-          <div class="cs"><div class="cs-lbl">Visitas perfil</div><div class="cs-val">196</div></div>
-          <div class="cs"><div class="cs-lbl">CTR</div><div class="cs-val">2,24%</div></div>
-          <div class="cs"><div class="cs-lbl">CPM</div><div class="cs-val">R$5,63</div></div>
-          <div class="cs"><div class="cs-lbl">VV 3s</div><div class="cs-val">2.606</div></div>
-          <div class="cs"><div class="cs-lbl">Retenção</div><div class="cs-val">59,44%</div></div>
+    <!-- 3º -->
+    <div class="creative-card">
+      <div class="cc-top">
+        <span class="cc-badge badge-cc2">3º CC</span>
+        <span class="cc-rank">67 conversas</span>
+      </div>
+      <div class="cc-body">
+        <div class="cc-stat-row">
+          <div class="cs"><span class="cs-lbl">Conversas</span><span class="cs-val">67</span></div>
+          <div class="cs"><span class="cs-lbl">Custo/conversa</span><span class="cs-val">R$1,98</span></div>
         </div>
+        <a class="cc-link" href="https://www.instagram.com/p/DTxhpdLjISC/" target="_blank">
+          <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+          Ver anúncio
+        </a>
       </div>
     </div>
 
-    <!-- Período 2 -->
-    <div class="period-header">
-      <div class="period-pill">Período 2 — 06/03 → 08/03</div>
-      <div class="period-line"></div>
-    </div>
+  </div>
 
-    <div style="margin-bottom:14px;">
-      <div class="cc-card neutral">
-        <div class="cc-badge badge-ca">📅 06/03 → 08/03</div>
-        <a class="cc-link" href="https://www.instagram.com/p/DVjaiuGgFvn/" target="_blank">instagram.com/p/DVjaiuGgFvn/</a>
-        <div class="cc-period">Criativo substituído · R$29,01 investidos</div>
-        <div class="cc-stats-4">
-          <div class="cs"><div class="cs-lbl">Seguidores</div><div class="cs-val" style="color:var(--ca)">16</div></div>
-          <div class="cs"><div class="cs-lbl">Custo/seg.</div><div class="cs-val">R$1,81</div></div>
-          <div class="cs"><div class="cs-lbl">Impressões</div><div class="cs-val">4.464</div></div>
-          <div class="cs"><div class="cs-lbl">Visitas perfil</div><div class="cs-val">120</div></div>
-          <div class="cs"><div class="cs-lbl">CTR</div><div class="cs-val">2,67%</div></div>
-          <div class="cs"><div class="cs-lbl">CPM</div><div class="cs-val">R$6,50</div></div>
-          <div class="cs"><div class="cs-lbl">VV 3s</div><div class="cs-val">1.283</div></div>
-          <div class="cs"><div class="cs-lbl">Retenção</div><div class="cs-val">45,91%</div></div>
+  <!-- ══ MELHORES CRIATIVOS — ATRAÇÃO ══ -->
+  <p class="sec-lbl">Melhores criativos · campanha de atração (CA)</p>
+  <div class="creative-grid-3" style="margin-bottom:48px;">
+
+    <!-- 1º CA -->
+    <div class="creative-card top1-ca">
+      <div class="cc-top">
+        <span class="cc-badge badge-ca1">🏆 #1 CA</span>
+        <span class="cc-rank">103 seguidores</span>
+      </div>
+      <div class="cc-body">
+        <div class="cc-stat-row">
+          <div class="cs"><span class="cs-lbl">Seguidores</span><span class="cs-val v-ca">103</span></div>
         </div>
+        <a class="cc-link" href="https://www.instagram.com/p/DSDWP6NjE2z/" target="_blank">
+          <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+          Ver anúncio
+        </a>
       </div>
     </div>
 
-  </section>
+    <!-- 2º CA -->
+    <div class="creative-card">
+      <div class="cc-top">
+        <span class="cc-badge badge-ca2">2º CA</span>
+        <span class="cc-rank">57 seguidores</span>
+      </div>
+      <div class="cc-body">
+        <div class="cc-stat-row">
+          <div class="cs"><span class="cs-lbl">Seguidores</span><span class="cs-val">57</span></div>
+        </div>
+        <a class="cc-link" href="https://www.instagram.com/p/DTS9jz_gOGv/" target="_blank">
+          <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+          Ver anúncio
+        </a>
+      </div>
+    </div>
+
+    <!-- 3º CA -->
+    <div class="creative-card">
+      <div class="cc-top">
+        <span class="cc-badge badge-ca2">3º CA</span>
+        <span class="cc-rank">55 seguidores</span>
+      </div>
+      <div class="cc-body">
+        <div class="cc-stat-row">
+          <div class="cs"><span class="cs-lbl">Seguidores</span><span class="cs-val">55</span></div>
+        </div>
+        <a class="cc-link" href="https://www.instagram.com/p/DQ7TmL9DHFz/" target="_blank">
+          <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+          Ver anúncio
+        </a>
+      </div>
+    </div>
+
+  </div>
+
+
+  <div class="divider"></div>
+
+
+  <!-- ══ POSTS COM MAIS ALCANCE ══ -->
+  <p class="sec-lbl">Posts com mais alcance no período</p>
+  <div class="posts-grid">
+
+    <div class="post-card">
+      <div class="post-rank">
+        <span class="post-rank-num">01</span>
+        maior alcance
+      </div>
+      <a class="post-link" href="https://www.instagram.com/p/DS0j6Pklep3/" target="_blank">
+        <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+        Ver post · DS0j6Pk
+      </a>
+    </div>
+
+    <div class="post-card">
+      <div class="post-rank">
+        <span class="post-rank-num">02</span>
+        maior alcance
+      </div>
+      <a class="post-link" href="https://www.instagram.com/reel/DT3uarzkyEJ/" target="_blank">
+        <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+        Ver reel · DT3uarz
+      </a>
+    </div>
+
+    <div class="post-card">
+      <div class="post-rank">
+        <span class="post-rank-num">03</span>
+        maior alcance
+      </div>
+      <a class="post-link" href="https://www.instagram.com/reel/DU_KFQkE4DA/" target="_blank">
+        <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+        Ver reel · DU_KFQk
+      </a>
+    </div>
+
+  </div>
+
 
   <!-- FOOTER -->
   <footer>
-    <p>Elevent · Tráfego Pago · Las Quebradas · 02/03 – 08/03/2025</p>
+    <p>Elevent · Visão Geral · Nov 2024 — Fev 2025</p>
     <div class="legend">
-      <div class="leg"><span class="dot dot-g"></span>Dentro / acima do ideal</div>
-      <div class="leg"><span class="dot dot-y"></span>Próximo do ideal</div>
-      <div class="leg"><span class="dot dot-r"></span>Abaixo do ideal</div>
+      <div class="leg"><span class="dot dot-cc"></span>Conversão (CC)</div>
+      <div class="leg"><span class="dot dot-ca"></span>Atração (CA)</div>
     </div>
   </footer>
 
